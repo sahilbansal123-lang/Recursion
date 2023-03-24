@@ -71,13 +71,47 @@ public class Recursion {
         fibonacciSeries(b, c, n-1);
     }
 
+//    Q6: Calculate x^n recursively (Stack height = log(n))
+
+    public static int exponents(int x, int n){
+
+        if (x == 0 ){
+            return 0;
+        }
+        if (n == 0){
+            return 1;
+        }
+
+        if(n % 2 == 0){
+            return exponents(x, n/2) * exponents(x,n/2);
+        }
+        else {
+            return exponents(x, n/2) * exponents(x, n/2) * x;
+        }
+    }
+
+//    Q7: Calculate x^n recursively (Stack height = n)
+
+    public static int exponent(int x, int n){
+
+        if (x == 0 ){
+            return 0;
+        }
+        if (n == 0){
+            return 1;
+        }
+
+        int xPownm1 = exponent(x, n/2);
+        int xPown = x * xPownm1;
+        return xPown;
+    }
 
 
     public static void main(String[] args) {
-        int a = 0, b = 1;
-        int n = 7;
-        System.out.println(a);
-        System.out.println(b);
-        fibonacciSeries(a, b, n-2);
+        int x = 2;
+        int n = 5;
+
+        int ans = exponents(x, n);
+        System.out.println(ans);
     }
 }
