@@ -1,5 +1,7 @@
 package recursion;
 
+import java.util.HashSet;
+
 public class RecursionHardProblems {
 //----------------------------------------------------------------------------------------------------------------------
 //      Q1: Tower of Hanoi;
@@ -69,6 +71,9 @@ public class RecursionHardProblems {
 //        } else {
 //            return false;
 //        }
+
+//                    OR
+
         if (arr[idx] >= arr[idx + 1]){
             // array is Unsorted
             return false;
@@ -102,10 +107,98 @@ public class RecursionHardProblems {
     }
 //    ------------------------------------------------------------------------------------------------------------------
 
+//    Q6: Print all the subsequences of the string
+//        Time Complexity: O(2^n)
+
+    public static void subSequences(String str, int idx, String newStr){
+
+        if(idx == str.length()){
+            System.out.println(newStr);
+            return;
+        }
+
+        char currentChar = str.charAt(idx);
+
+        // to be
+        subSequences(str, idx+1, newStr+currentChar);
+        // not to be
+        subSequences(str, idx + 1, newStr);
+    }
+
+//  --------------------------------------------------------------------------------------------------------------------
+
+//     Q7: Remove all duplicates form the string
+//         Time complexity: O(n)
+
+
+    public static boolean[] map = new boolean[26];
+    public static void removeDuplicates(String str, String newStr, int idx){
+
+        if (idx == str.length()){
+            System.out.println(newStr);
+            return;
+        }
+
+        char currChar = str.charAt(idx);
+        if(map[currChar-'a'] == true){
+            removeDuplicates(str, newStr, idx+1);
+        } else {
+            newStr += currChar;
+            map[currChar - 'a'] = true;
+            removeDuplicates(str, newStr, idx+1);
+        }
+    }
+
+//    ------------------------------------------------------------------------------------------------------------------
+
+//    Q8: Print all unique subSequence of the string
+//        Time Complexity:
+
+    public static void uniqueSubSeq(String str, String newStr, int idx, HashSet<String>set){
+        if(idx == str.length()){
+            if(set.contains(newStr)){
+                return;
+            } else {
+                System.out.println(newStr);
+                set.add(newStr);
+                return;
+            }
+        }
+
+        char currentChar = str.charAt(idx);
+
+        // to be
+        uniqueSubSeq(str, newStr+currentChar, idx+1, set);
+        // not to be
+        uniqueSubSeq(str, newStr, idx + 1, set);
+    }
+
+//    ------------------------------------------------------------------------------------------------------------------
+
+//    Q9: Print keypad Combinations
+//        Time Complexity: O(4^n)
+
+    public static String[] keypad = {".", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tu", "vwx", "yz"};
+
+    public static void keypadCombinations(String number, int idx, String Combinations) {
+
+        if(idx == number.length()){
+            System.out.println(Combinations);
+            return;
+        }
+
+        char currChar = number.charAt(idx);
+        String keyAlphabets = keypad[currChar - '0'];
+        for (int i = 0; i < keyAlphabets.length(); i++){
+            keypadCombinations(number, idx + 1, Combinations + keyAlphabets.charAt(i));
+        }
+
+    }
 
     public static void main(String[] args) {
 
-        String str = "axxxbbcdbxxab";
-        movEnd(str, 0, "", 0);
+        String number = "235";
+//        HashSet <String> set = new HashSet<>();
+        keypadCombinations(number, 0, "");
     }
 }
