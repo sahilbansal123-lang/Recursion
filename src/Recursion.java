@@ -36,20 +36,20 @@ public class Recursion {
 
 //    Q3: print sum of first n natural numbers
 
-    public static void sumNumbers(int i, int n, int sum){
-        if(i == n){
-            sum += i;
-            System.out.println(sum);
-            return;
+    public static int sumNumbers(int n){
+
+        if (n == 0){
+            return 0;
         }
-        sum +=i;
-        sumNumbers(i+1, n, sum);
+        int sum_nm1 = sumNumbers(n-1);
+        int sum_n = n + sumNumbers(n-1);
+        return sum_n;
     }
 
 //    Q4: Print factorial of a first n natural numbers
 
     public static int factorialSum(int n){
-        if(n == 1 || n == 0 ){
+        if(n == 0){
            return 1;
         }
 
@@ -60,15 +60,16 @@ public class Recursion {
 
 //    Q5: print fibbonacci series
 
-    public static void fibonacciSeries(int a, int b, int n) {
+    public static int fibonacciSeries(int n) {
 
-        if(n == 0){
-            return;
+        if ( n == 0 || n == 1){
+            return n;
         }
 
-        int c = a + b;
-        System.out.println(c);
-        fibonacciSeries(b, c, n-1);
+        int fib_nm1 = fibonacciSeries(n-1);
+        int fib_nm2 = fibonacciSeries(n-2);
+        int fib_n = fib_nm1 + fib_nm2;
+        return fib_n;
     }
 
 //    Q6: Calculate x^n recursively (Stack height = log(n))
@@ -111,7 +112,6 @@ public class Recursion {
         int x = 2;
         int n = 5;
 
-        int ans = exponents(x, n);
-        System.out.println(ans);
+        System.out.println(fibonacciSeries(n));
     }
 }
