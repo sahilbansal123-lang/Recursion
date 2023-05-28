@@ -16,11 +16,15 @@ public class PowerOfX {
         if (n == 0) {
             return 1;
         }
-        int power = x * powerOfX(x, n-1);
-        return power;
+        int halfPowerSq = powerOfXOptimized(x, n/2) * powerOfXOptimized(x, n/2);
+        if (n % 2 != 0) {
+            halfPowerSq = x * halfPowerSq;
+        }
+        return halfPowerSq;
     }
 
     public static void main(String[] args) {
-        System.out.println(powerOfX(2, 20));
+        System.out.println(powerOfX(2, 5));
+        System.out.println(powerOfXOptimized(2, 5));
     }
 }
